@@ -1,0 +1,12 @@
+<div class="toastr-container {{position}}">
+  <div class="toastr toastr-{{notification.type ? notification.type : 'grey'}}" *ngFor="let notification of notifications| async | slice:0:maxToast+1;let index = index;">
+    <span *ngIf="index !== maxToast">
+      <strong>{{notification.heading}}: </strong>
+          <span *ngIf="notification.subHeading">{{notification.subHeading}}- </span>{{notification.message}}
+        <button class="close" (click)="dismiss(index)">&times;</button>
+    </span>
+    <span *ngIf="index === maxToast">
+      Remaining notification(s) {{(notifications | async)?.length - maxToast }}
+    </span>
+  </div>
+</div>
