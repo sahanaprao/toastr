@@ -1,27 +1,75 @@
 # Toastr
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.24.
+## Setup
 
-## Development server
+`step1:` Add ToastrModule to app NgModule
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-## Code scaffolding
+import { ToastrModule } from './toastr/toastr.module';
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    ToastrModule.forRoot()
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
-## Build
+## Use
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```
+import { ToastrService } from 'ngx-toastr';
+ 
+@Component({...})
+export class YourComponent {
+  constructor(private toastr: ToastrService) {}
+ 
+  showSuccess() {
+    this.toastr.success('Hello world!', 'heading', 'sub heading);
+  }
+}
+```
 
-## Running unit tests
+## Options
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+There are `Individual Options` and `Global Options`.
 
-## Running end-to-end tests
+`Individual Options`
+## Individual Options
+Passed to ToastrService.success/warning/error()
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+| Option        | Type          
+| ------------- |:-------------:
+| message       | any 
+| Heading       | any      
+| SubHeading    | any      
 
-## Further help
+## Global Options
+Pass values to ToastrModule.forRoot()
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+| Option          | Type           | Default           |
+| -------------   |:-------------: | ---------------:  |
+| positionClass   | string         | 'toast-top-right' |
+| timeOut         | number         |  5000             |
+| maxToastr       | number         |    5              |
+
+```
+// root app NgModule
+imports: [
+  ToastrModule.forRoot({
+    timeOut: 5000,
+    positionClass: 'toast-top-right',
+    maxToast: 5
+  }),
+]
+```
