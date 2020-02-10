@@ -30,12 +30,6 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
-  it(`should have as title 'toastr'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('toastr');
-  });
-
   it('should call getToastr function with min 2 params', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const component = fixture.componentInstance;
